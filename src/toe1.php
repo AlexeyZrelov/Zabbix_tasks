@@ -24,14 +24,14 @@ OOO
 // 	]
 // ];
 
-$N = readline(":");
+$N = readline();
 $input[] = [];
 
 for ($i=0; $i < $N; $i++) {
 
     $N1 = 3;
     for ($j=0; $j < $N1; $j++) {
-        $input[$i][$j] = readline(":");
+        $input[$i][$j] = readline();
     }
     echo "\n";
 }

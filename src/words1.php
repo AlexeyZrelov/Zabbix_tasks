@@ -1,5 +1,6 @@
 <?php
 /*
+Sample input:
 3
 2
 acm
@@ -11,34 +12,106 @@ mouse
 2
 ok
 ok
+
+Sample output:
+The door cannot be opened.
+Ordering is possible.
+The door cannot be opened
  */
 
-$N = readline(":");
+/*
+$N = readline();
 $input[] = [];
 
 for ($i=0; $i < $N; $i++) {
 
-    $N1 = readline(":");
+    $N1 = readline();
     for ($j=0; $j < $N1; $j++) {
-        $input[$i][$j] = readline(":");
+        $input[$i][$j] = readline();
     }
 
 }
+/*/
+
+/*
+$N = rtrim(fgets(STDIN));
+$input = [];
+
+for ($i=0; $i < $N; $i++) {
+
+	$N1 = rtrim(fgets(STDIN));
+    for ($j=0; $j < $N1; $j++) {
+        $input[$i][$j] = rtrim(fgets(STDIN));
+    }
+
+}
+//*/
+//=====================
+
+/**/
+$input = [
+    ['acm', 'ibm'],
+    ['acm', 'malform', 'mouse'],
+    ['ok', 'ok']
+];
+//*/
 
 foreach ($input as $value) {
 
-    $tmp = [];
+    $graph = [];
+    // $startNode = $value[0];
+    $node = $value[0];
+    $path = false;
+    // $count = 0;
 
     foreach ($value as $val) {
-        $tmp[] = substr($val, 0, 1);
-        $tmp[] = substr($val, -1);
+
+        $graph[$val] = [];
+        // $i = 0;
+
+        foreach ($value as $v) {
+
+            if (substr($node, -1) === substr($v, 0,1) && $node !== $v) {
+
+                // if (in_array($v, $graph[$node])) {
+                //     $i++;
+                //     $graph[$node][] = $v.$i;
+                // } else {
+                //     $graph[$node][] = $v;
+                // }
+
+                $graph[$node][] = $v;
+                $path = true;
+                // $count++;
+
+            }
+
+            $node = $val;
+
+        }
+
     }
 
-    $result = array_slice($tmp, 1, -1);
+    // $visited[] = $startNode;
+    // foreach($graph[$startNode] as $vertex) {
+    //     if( !in_array($vertex , $visited )) {
+    //         $visited[] = $vertex;
+    //         $count++;
+    //     }
+    // }
 
-    if (count(array_unique($result)) === 1) {
+
+    if ($path) {
         echo "Ordering is possible.\n";
     } else {
         echo "The door cannot be opened.\n";
     }
+
+    // if ($count !== 0) {
+    //     echo "Ordering is possible.\n";
+    // } else {
+    //     echo "The door cannot be opened.\n";
+    // }
+
+
 }
